@@ -2,20 +2,20 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["referentialIntegrity"]
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider             = "postgres"
+  url                  = env("DATABASE_URL")
   referentialIntegrity = "prisma"
 }
 
-model User{
-  id String @id @default(cuid())
-  name String
-  email String @unique 
+model User {
+  id       String @id @default(cuid())
+  name     String
+  email    String @unique
   username String @unique
   password String
 
@@ -23,16 +23,14 @@ model User{
   updatedAt DateTime @updatedAt
 
   hunches Hunch[]
-
 }
 
-model Game{
-  id String @id @default(cuid())
+model Game {
+  id       String   @id @default(cuid())
   gameTime DateTime
   homeTeam String
   awayTeam String
-  
-  
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -41,10 +39,10 @@ model Game{
   @@unique([homeTeam, awayTeam, gameTime])
 }
 
-model Hunch{
-  id String @id @default(cuid())
-  userId String
-  gameId String
+model Hunch {
+  id            String @id @default(cuid())
+  userId        String
+  gameId        String
   homeTeamScore Int
   awayTeamScore Int
 
